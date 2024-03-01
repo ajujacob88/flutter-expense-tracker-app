@@ -15,8 +15,7 @@ class _ExpensesState extends State<Expenses> {
       body: Column(
         children: [
           Text('chart'),
-          Text('expense 1'),
-          Text('expense 3'),
+          Text('expenses List'),
         ],
       ),
     );
