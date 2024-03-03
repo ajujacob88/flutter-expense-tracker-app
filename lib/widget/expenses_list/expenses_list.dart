@@ -1,3 +1,4 @@
+import 'package:expense_tracker_app/widget/expenses_list/expense_item.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker_app/models/expense.dart';
 
@@ -9,7 +10,7 @@ class ExpensesList extends StatelessWidget {
     //listview.builder - only the items will be loaded only if they are about to be visible
     return ListView.builder(
       itemCount: expenses.length,
-      itemBuilder: (ctx, index) => Text(expenses[index].title),
+      itemBuilder: (ctx, index) => ExpenseItem(expenses[index]),
 
       //this is same as
       // itemBuilder: (ctx, index) {
