@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+
+final formatter = DateFormat.yMd();
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
@@ -21,6 +22,8 @@ class _NewExpenseState extends State<NewExpense> {
 
   final _amountController = TextEditingController();
 
+  DateTime? _selectedDate;
+
 //the controller should be disposed/deleted after its use,, so the below method is necessary while using textediting contoller
   @override
   void dispose() {
@@ -29,14 +32,23 @@ class _NewExpenseState extends State<NewExpense> {
     super.dispose();
   }
 
-  void _prsentDatePicker() {
-    showDatePicker(
+  void _prsentDatePicker() async {
+    final pickedDate = await showDatePicker(
       context: context,
       //firstDate: DateTime(1980),
       firstDate: DateTime(
           DateTime.now().year - 1, DateTime.now().month, DateTime.now().day),
       lastDate: DateTime.now(),
     );
+    // ).then((value) => print(value)); //this also cn be used instead of async, but async is commonlu used
+
+    //the lines after await will be executed only after await function is executed
+    //this line will only will be executed if the value is available
+    //print(pickedDate);
+
+    setState(() {
+      _selectedDate = pickedDate;
+    });
   }
 
   @override
@@ -72,7 +84,12 @@ class _NewExpenseState extends State<NewExpense> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text('Selected Date'),
+                    Text(
+                      _selectedDate == null
+                          ? 'No date selected'
+                          : formatter.format(_selectedDate!),
+                      //! means tell dart it wont be null
+                    ),
                     IconButton(
                       onPressed: _prsentDatePicker,
                       icon: const Icon(Icons.calendar_month),
