@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
@@ -27,6 +29,16 @@ class _NewExpenseState extends State<NewExpense> {
     super.dispose();
   }
 
+  void _prsentDatePicker() {
+    showDatePicker(
+      context: context,
+      //firstDate: DateTime(1980),
+      firstDate: DateTime(
+          DateTime.now().year - 1, DateTime.now().month, DateTime.now().day),
+      lastDate: DateTime.now(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,13 +51,36 @@ class _NewExpenseState extends State<NewExpense> {
             // keyboardType: TextInputType.text, //this is default, so no need to specify
             decoration: const InputDecoration(label: Text('Title')),
           ),
-          TextField(
-            controller: _amountController,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              prefixText: '₹ ',
-              label: Text('Amount'),
-            ),
+          Row(
+            //Row inside column and then textfield causes problem, so use expanded inside row
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _amountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    prefixText: '₹ ',
+                    label: Text('Amount'),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text('Selected Date'),
+                    IconButton(
+                      onPressed: _prsentDatePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    )
+                  ],
+                ),
+              )
+            ],
           ),
           Row(
             children: [
