@@ -10,9 +10,18 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
-  var _enteredTitle = '';
-  void _saveTitleInput(String inputValue) {
-    _enteredTitle = inputValue;
+  // var _enteredTitle = '';
+  // void _saveTitleInput(String inputValue) {
+  //   _enteredTitle = inputValue;
+  // }
+
+  final _titleController = TextEditingController();
+
+//the controller should be disposed/deleted after its use,, so the below method is necessary while using textediting contoller
+  @override
+  void dispose() {
+    _titleController.dispose();
+    super.dispose();
   }
 
   @override
@@ -22,7 +31,7 @@ class _NewExpenseState extends State<NewExpense> {
       child: Column(
         children: [
           TextField(
-            onChanged: _saveTitleInput,
+            controller: _titleController,
             maxLength: 50,
             // keyboardType: TextInputType.text,
             decoration: const InputDecoration(label: Text('Title')),
@@ -31,7 +40,7 @@ class _NewExpenseState extends State<NewExpense> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  print(_enteredTitle);
+                  print(_titleController.text);
                   //now do the actions for enteredTitle.. This is one way of doing...we can verify that the enteredtitle is saved using the print in debug console
                 },
                 child: const Text('Save Expense'),
