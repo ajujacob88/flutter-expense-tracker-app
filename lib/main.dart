@@ -3,8 +3,11 @@ import 'package:expense_tracker_app/widget/expenses.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      home: Expenses(),
+    MaterialApp(
+      theme: ThemeData().copyWith(
+        scaffoldBackgroundColor: Color.fromARGB(255, 154, 28, 212),
+      ),
+      home: const Expenses(),
     ),
   );
 }
