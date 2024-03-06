@@ -55,6 +55,18 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
+  void _submitExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    //tryParse('Hello') will be null,,, tryParse('2.35') will be 2.35
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null) {
+      //show an error message
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -140,9 +152,7 @@ class _NewExpenseState extends State<NewExpense> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  print(_titleController.text);
-                  //now do the actions for enteredTitle.. This is one way of doing...we can verify that the enteredtitle is saved using the print in debug console
-                  print(_amountController.text);
+                  _submitExpenseData();
                 },
                 child: const Text('Save Expense'),
               ),
