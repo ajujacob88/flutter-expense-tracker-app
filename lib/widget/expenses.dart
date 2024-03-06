@@ -2,7 +2,6 @@ import 'package:expense_tracker_app/widget/expenses_list/expenses_list.dart';
 import 'package:expense_tracker_app/widget/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker_app/models/expense.dart';
-import 'package:flutter/widgets.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -34,8 +33,16 @@ class _ExpensesState extends State<Expenses> {
       // }
       // builder: (ctx) => const Text('Aju Modal bottom sheet'),
 
-      builder: (ctx) => const NewExpense(),
+      builder: (ctx) => NewExpense(
+        onAddExpense: _addExpense,
+      ),
     );
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
   }
 
   @override
