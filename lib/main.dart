@@ -19,6 +19,12 @@ void main() {
           // margin: const EdgeInsets.all(16),
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
+
+        // cardTheme: ThemeData().cardTheme.copyWith(
+        //       color: kColorScheme.secondaryContainer,
+        //       // margin: const EdgeInsets.all(16),
+        //       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        //     ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: kColorScheme.primaryContainer,
