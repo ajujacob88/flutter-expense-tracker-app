@@ -31,6 +31,14 @@ void main() {
                 fontSize: 16,
               ),
             ),
+
+        // textTheme: const TextTheme().copyWith(
+        //   titleLarge: TextStyle(
+        //     fontWeight: FontWeight.normal,
+        //     color: kColorScheme.onSecondaryContainer,
+        //     fontSize: 16,
+        //   ),
+        // ),
       ),
       home: const Expenses(),
     ),
