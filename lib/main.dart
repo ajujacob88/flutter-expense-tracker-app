@@ -4,9 +4,29 @@ import 'package:expense_tracker_app/widget/expenses.dart';
 var kColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 96, 59, 181),
 );
+
+var kDarkColorScheme = ColorScheme.fromSeed(
+  brightness: Brightness.dark,
+  seedColor: const Color.fromARGB(255, 5, 99, 125),
+);
+
 void main() {
   runApp(
     MaterialApp(
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: kDarkColorScheme,
+        cardTheme: const CardTheme().copyWith(
+          color: kDarkColorScheme.secondaryContainer,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kDarkColorScheme.primaryContainer,
+            foregroundColor: kDarkColorScheme.onPrimaryContainer,
+          ),
+        ),
+      ),
+      //above is the dark theme and below is the light theme,, it can be controlled by the thememode parameter in the material app (given at the end)
       theme: ThemeData().copyWith(
         colorScheme: kColorScheme,
         appBarTheme: const AppBarTheme().copyWith(
@@ -46,6 +66,9 @@ void main() {
         //   ),
         // ),
       ),
+      //themeMode: ThemeMode.light,
+      //themeMode: ThemeMode.system,
+      // above thememode.system is default, so no need to specify it again, it will automatically be chosed,,, Thememode.system means chose dark or light mode according to the user os setting saved by user,, Thememode.dark means always set the app to run on dark mode
       home: const Expenses(),
     ),
   );
